@@ -42,7 +42,13 @@ void RadixTree<ValueType>::insert(std::string key, const ValueType& value)
 template <typename ValueType>
 ValueType* RadixTree<ValueType>::search(std::string key) const
 {
-	return (m_map->find(key)->second);
+	
+	//return (m_map->find(key)->second);
+	auto it = m_map->find(key);
+	if (it != m_map->end()) {
+		return it->second;
+	}
+	return nullptr;
 }
 
 #endif // RADIXTREE_INCLUDED

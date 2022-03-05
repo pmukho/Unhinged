@@ -5,6 +5,7 @@
 
 #include <string>
 #include "RadixTree.h"
+#include <vector>
 
 struct AttValPair;
 
@@ -20,7 +21,7 @@ public:
 private:
 	std::string m_name;
 	std::string m_email;
-	//RadixTree<
+	RadixTree<std::vector<std::string>>* m_rtreeAttVal;
 };
 
 #endif // PERSONPROFILE_INCLUDED

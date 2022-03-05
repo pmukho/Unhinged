@@ -38,6 +38,8 @@ int main() {
     r.insert("hello", 1);
     //r.insert("there", 2);
     std::cout << *(r.search("hello")) << std::endl;
+    r.search("not here");
+    PersonProfile("bill", "bbob@gmail.com");
 }
 
 //bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)

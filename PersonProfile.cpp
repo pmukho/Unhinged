@@ -1,13 +1,16 @@
 // PersonProfile.cpp
 
 #include "PersonProfile.h"
+#include "provided.h"
 
 PersonProfile::PersonProfile(std::string name, std::string email)
-	: m_name(name), m_email(email)
+	: m_name(name), m_email(email), m_rtreeAttVal(new RadixTree<std::vector<std::string>>)
 {}
 
 PersonProfile::~PersonProfile()
-{}
+{
+	delete m_rtreeAttVal;
+}
 
 std::string PersonProfile::GetName() const
 {
@@ -21,7 +24,10 @@ std::string PersonProfile::GetEmail() const
 
 void PersonProfile::AddAttValPair(const AttValPair& attval)
 {
-	return;
+	//return;
+	if (m_rtreeAttVal->search(attval.attribute) != nullptr) {
+
+	}
 }
 
 int PersonProfile::GetNumAttValPairs() const
