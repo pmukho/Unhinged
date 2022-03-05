@@ -41,7 +41,7 @@ void PersonProfile::AddAttValPair(const AttValPair& attval)
 	//}
 	std::set<std::string>* foundAttSet = m_rtreeAttVal->search(attval.attribute);
 	if (foundAttSet != nullptr) { // existing attribute
-		if (foundAttSet->insert(attval.value).second == false) { // attval.value is in given attribute set, nothing to add
+		if (foundAttSet->insert(attval.value).second == false) { // existing attribute-value pair, fail to insert
 			return;
 		}
 	}
@@ -49,7 +49,6 @@ void PersonProfile::AddAttValPair(const AttValPair& attval)
 		std::set<std::string> toAddSet;
 		toAddSet.insert(attval.value);
 		m_rtreeAttVal->insert(attval.attribute, toAddSet);
-		//m_attSet->insert(attval.attribute);
 		m_attVec->push_back(attval.attribute);
 	}
 	m_countAttValPairs++;
@@ -57,43 +56,26 @@ void PersonProfile::AddAttValPair(const AttValPair& attval)
 
 int PersonProfile::GetNumAttValPairs() const
 {
-	/*int countAttValPairs = 0;
-	for (int i = 0; i < m_attVec->size(); i++) {
-		std::string attOfInterest = (*m_attVec)[i];
-		countAttValPairs += m_rtreeAttVal->search(attOfInterest)->size();
-	}
-	return countAttValPairs;*/
 	return m_countAttValPairs;
 }
 
 bool PersonProfile::GetAttVal(int attribute_num, AttValPair& attval) const
 {
 	//invalid argument: attribute_num
-	if (attribute_num < 0 || attribute_num > GetNumAttValPairs()) {
+	if (attribute_num < 0 || attribute_num >= GetNumAttValPairs()) {
 		return false;
 	}
 
 	int stepsTaken = 0;
-	/*for (int i = 0; i < m_attVec->size(); i++) {
-		std::string attOfInterest = (*m_attVec)[i];
-		std::vector<std::string>* valsForAtt = m_rtreeAttVal->search(attOfInterest);
-		for (int j = 0; j < valsForAtt->size(); j++) {
-			stepsTaken++;
-			if (stepsTaken == attribute_num) {
-				attval = AttValPair(attOfInterest, (*valsForAtt)[j]);
-				return true;
-			}
-		}
-	}*/
 	for (int i = 0; i < m_attVec->size(); i++) {
 		std::string attOfInterest = (*m_attVec)[i];
 		std::set<std::string>* valsForAtt = m_rtreeAttVal->search(attOfInterest);
 		for (auto it = valsForAtt->cbegin(); it != valsForAtt->end(); it++) {
-			stepsTaken++;
 			if (stepsTaken == attribute_num) {
 				attval = AttValPair(attOfInterest, *it);
 				return true;
 			}
+			stepsTaken++;
 		}
 	}
 	//unreachable

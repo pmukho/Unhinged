@@ -1,5 +1,3 @@
 ﻿  PersonProfile.cpp
-C:\Users\pmukh\code\Unhinged\Unhinged\PersonProfile.cpp(88,20): warning C4018: '<': signed/unsigned mismatch
-  main.cpp
-  Generating Code...
+C:\Users\pmukh\code\Unhinged\Unhinged\PersonProfile.cpp(70,20): warning C4018: '<': signed/unsigned mismatch
   Unhinged.vcxproj -> C:\Users\pmukh\code\Unhinged\Debug\Unhinged.exe

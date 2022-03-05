@@ -39,11 +39,13 @@ int main() {
     pp1.AddAttValPair(AttValPair("hobby", "rowing"));
     pp1.AddAttValPair(AttValPair("hobby", "gambling"));
     pp1.AddAttValPair(AttValPair("occupation", "free_loader"));
-    pp1.AddAttValPair(AttValPair("hobby", "rowing"));
+    //pp1.AddAttValPair(AttValPair("hobby", "rowing"));
     std::cout << pp1.GetNumAttValPairs() << std::endl;
-    AttValPair av;
-    if (pp1.GetAttVal(1, av)) std::cout << "Found it: " << av.attribute << ", " << av.value << std::endl;
-    else std::cout << "Not found" << std::endl;
+    for (int i = 0; i != pp1.GetNumAttValPairs(); i++) {
+        AttValPair av;
+        pp1.GetAttVal(i, av);
+        std::cout << av.attribute << " ==> " << av.value << std::endl;
+    }
 }
 
 //bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)
