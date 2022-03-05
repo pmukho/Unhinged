@@ -34,12 +34,15 @@ int main() {
     //    ;
 
     //std::cout << "Happy dating!" << std::endl;
-    RadixTree<int> r;
-    r.insert("hello", 1);
-    //r.insert("there", 2);
-    std::cout << *(r.search("hello")) << std::endl;
-    r.search("not here");
-    PersonProfile("bill", "bbob@gmail.com");
+    PersonProfile pp1("billy", "bbob@yahoo.com");
+    std::cout << pp1.GetName() << ", " << pp1.GetEmail() << std::endl;
+    pp1.AddAttValPair(AttValPair("hobby", "rowing"));
+    pp1.AddAttValPair(AttValPair("hobby", "gambling"));
+    pp1.AddAttValPair(AttValPair("occupation", "free_loader"));
+    std::cout << pp1.GetNumAttValPairs() << std::endl;
+    AttValPair av;
+    if (pp1.GetAttVal(1, av)) std::cout << "Found it: " << av.attribute << ", " << av.value << std::endl;
+    else std::cout << "Not found" << std::endl;
 }
 
 //bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)

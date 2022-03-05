@@ -22,6 +22,7 @@ private:
 	std::string m_name;
 	std::string m_email;
 	RadixTree<std::vector<std::string>>* m_rtreeAttVal;
+	std::vector<std::string>* m_attVec;
 };
 
 #endif // PERSONPROFILE_INCLUDED
