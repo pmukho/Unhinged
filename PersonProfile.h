@@ -6,6 +6,7 @@
 #include <string>
 #include "RadixTree.h"
 #include <vector>
+#include <set>
 
 struct AttValPair;
 
@@ -21,7 +22,10 @@ public:
 private:
 	std::string m_name;
 	std::string m_email;
-	RadixTree<std::vector<std::string>>* m_rtreeAttVal;
+	int m_countAttValPairs;
+	//RadixTree<std::vector<std::string>>* m_rtreeAttVal;
+	RadixTree<std::set<std::string>>* m_rtreeAttVal;
+	//std::set<std::string>* m_attSet;
 	std::vector<std::string>* m_attVec;
 };
 

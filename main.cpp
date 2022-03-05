@@ -39,6 +39,7 @@ int main() {
     pp1.AddAttValPair(AttValPair("hobby", "rowing"));
     pp1.AddAttValPair(AttValPair("hobby", "gambling"));
     pp1.AddAttValPair(AttValPair("occupation", "free_loader"));
+    pp1.AddAttValPair(AttValPair("hobby", "rowing"));
     std::cout << pp1.GetNumAttValPairs() << std::endl;
     AttValPair av;
     if (pp1.GetAttVal(1, av)) std::cout << "Found it: " << av.attribute << ", " << av.value << std::endl;
