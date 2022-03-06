@@ -25,10 +25,15 @@ RadixTree<ValueType>::RadixTree()
 template <typename ValueType>
 RadixTree<ValueType>::~RadixTree()
 {
-	for (auto it = m_map->begin(); it != m_map->end(); it++) {
+	/*for (auto it = m_map->begin(); it != m_map->end(); it++) {
 		delete it->second;
 	}
-	m_map->clear();
+	m_map->clear();*/
+	auto it = m_map->begin();
+	while (it != m_map->end()) {
+		delete it->second;
+		it = m_map->erase(it);
+	}
 }
 
 template <typename ValueType>
