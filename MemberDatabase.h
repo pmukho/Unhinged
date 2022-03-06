@@ -7,6 +7,8 @@
 #include "PersonProfile.h"
 #include "RadixTree.h"
 
+struct AttValPair;
+
 class MemberDatabase {
 public:
 	MemberDatabase();

@@ -46,6 +46,10 @@ int main() {
         pp1.GetAttVal(i, av);
         std::cout << av.attribute << " ==> " << av.value << std::endl;
     }
+
+    MemberDatabase md;
+    if (md.LoadDatabase("members.txt")) std::cout << "Load Success" << std::endl;
+    else std::cout << "Load Fail" << std::endl;
 }
 
 //bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)
