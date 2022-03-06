@@ -12,7 +12,10 @@ PersonProfile::~PersonProfile()
 {
 	delete m_rtreeAttVal;
 	//m_attVec->clear();
-	m_attvalVec->clear();
+	for (auto it = m_attvalVec->begin(); it != m_attvalVec->end(); it++) {
+		delete (*it);
+	}
+	delete m_attvalVec;
 }
 
 std::string PersonProfile::GetName() const
