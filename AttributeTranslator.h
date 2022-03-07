@@ -15,7 +15,8 @@ public:
 	bool Load(std::string filename);
 	std::vector<AttValPair> FindCompatibleAttValPairs(const AttValPair& source) const;
 private:
-	RadixTree<AttValPair>* m_rtreeAttValPair;
+	//outer tree to search val for given att, inner tree to serach compatible AttValPair given value associated with att
+	RadixTree<RadixTree<std::vector<AttValPair*>*>*>* m_rtreeAttSValSPairCompatible;
 };
 
 #endif // ATTRIBUTETRANSLATOR_INCLUDED

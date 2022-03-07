@@ -3,7 +3,8 @@
 #include "MemberDatabase.h"
 #include "provided.h"
 #include <fstream>
-#include <sstream>
+#include <iostream>
+//#include <sstream>
 
 MemberDatabase::MemberDatabase()
 	: m_rtreePProfile(new RadixTree<PersonProfile>)
@@ -22,7 +23,7 @@ bool MemberDatabase::LoadDatabase(std::string filename)
 	}
 
 	if (databaseFile.is_open()) {
-		std::string name, email, att, val;
+		std::string name, email, att, val, skip;
 		int attvalCount = 0;
 		while (databaseFile.good()) {
 			std::getline(databaseFile, name);
@@ -31,6 +32,7 @@ bool MemberDatabase::LoadDatabase(std::string filename)
 				return false;
 			}
 			databaseFile >> attvalCount;
+			std::getline(databaseFile, skip);
 			PersonProfile toAddPP(name, email);
 			for (int i = 0; i != attvalCount; i++) {
 				std::getline(databaseFile, att, ',');
@@ -38,6 +40,15 @@ bool MemberDatabase::LoadDatabase(std::string filename)
 				toAddPP.AddAttValPair(AttValPair(att, val));
 			}
 			m_rtreePProfile->insert(email, toAddPP);
+
+			std::getline(databaseFile, skip);
+
+			/*std::cout << toAddPP.GetName() << ", " << toAddPP.GetEmail() << std::endl;
+			for (int i = 0; i < toAddPP.GetNumAttValPairs(); i++) {
+				AttValPair av;
+				toAddPP.GetAttVal(i, av);
+				std::cout << av.attribute << ", " << av.value << std::endl;
+			}*/
 		}
 	}
 	return true;
