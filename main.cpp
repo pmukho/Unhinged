@@ -47,9 +47,15 @@ int main() {
         std::cout << av.attribute << " ==> " << av.value << std::endl;
     }
 
-    MemberDatabase md;
-    if (md.LoadDatabase("members.txt")) std::cout << "Load Success" << std::endl;
-    else std::cout << "Load Fail" << std::endl;
+    /*MemberDatabase md;
+    if (md.LoadDatabase("members.txt")) std::cout << "MemberDatabase Load Success" << std::endl;
+    else std::cout << "MemberDatabase Load Fail" << std::endl;*/
+
+    AttributeTranslator at;
+    if (at.Load("translator.txt")) std::cout << "AttributeTranslator Load Success" << std::endl;
+    else std::cout << "AttributeTranslator Load Fail" << std::endl;
+
+    std::cout << "????????????????????" << std::endl;
 }
 
 //bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)

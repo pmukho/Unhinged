@@ -41,6 +41,13 @@ void RadixTree<ValueType>::insert(std::string key, const ValueType& value)
 {
 	//m_map[key] = value;
 	//ValueType val = value;
+
+	//(*m_map)[key] = new ValueType(value);
+
+	auto it = m_map->find(key);
+	if (it != m_map->end()) {
+		delete it->second;
+	}
 	(*m_map)[key] = new ValueType(value);
 }
 

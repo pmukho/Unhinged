@@ -12,7 +12,7 @@ MemberDatabase::MemberDatabase()
 
 MemberDatabase::~MemberDatabase()
 {
-	delete m_rtreePProfile;
+	//delete m_rtreePProfile;
 }
 
 bool MemberDatabase::LoadDatabase(std::string filename)
@@ -33,13 +33,16 @@ bool MemberDatabase::LoadDatabase(std::string filename)
 			}
 			databaseFile >> attvalCount;
 			std::getline(databaseFile, skip);
-			PersonProfile toAddPP(name, email);
+			//PersonProfile toAddPP(name, email);
+			PersonProfile* toAddPP = new PersonProfile(name, email);
 			for (int i = 0; i != attvalCount; i++) {
 				std::getline(databaseFile, att, ',');
 				std::getline(databaseFile, val);
-				toAddPP.AddAttValPair(AttValPair(att, val));
+				//toAddPP.AddAttValPair(AttValPair(att, val));
+				toAddPP->AddAttValPair(AttValPair(att, val));
 			}
-			m_rtreePProfile->insert(email, toAddPP);
+			//m_rtreePProfile->insert(email, toAddPP);
+			m_rtreePProfile->insert(email, *toAddPP);
 
 			std::getline(databaseFile, skip);
 
