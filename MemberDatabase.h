@@ -4,6 +4,7 @@
 #define MEMBERDATABASE_INCLUDED
 
 #include <vector>
+#include <set>
 #include "PersonProfile.h"
 #include "RadixTree.h"
 
@@ -17,8 +18,10 @@ public:
 	std::vector<std::string> FindMatchingMembers(const AttValPair& input) const;
 	const PersonProfile* GetMemberByEmail(std::string email) const;
 private:
-	//RadixTree<PersonProfile>* m_rtreePProfile;
-	RadixTree<PersonProfile> m_rtreePProfile;
+	RadixTree<PersonProfile*> m_rtreeEmailToPProfile;
+	RadixTree<std::vector<std::string>*> m_rtreeAttValToEmails;
+	std::set<std::string> m_emailSet;
+	std::set<std::string> m_attvalSet;
 };
 
 #endif // MEMBERDATABASE_INCLUDED

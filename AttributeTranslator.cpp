@@ -5,14 +5,11 @@
 #include <iostream>
 
 AttributeTranslator::AttributeTranslator()
-//	: m_rtreeAttSValSPairCompatible(new RadixTree<RadixTree<std::vector<AttValPair>>>)
-//	: m_rtreePairToPair(new RadixTree<std::vector<std::string>>)
 	: m_rtreePairToPair(new RadixTree<std::vector<AttValPair>>)
 {}
 
 AttributeTranslator::~AttributeTranslator()
 {
-	//delete m_rtreeAttSValSPairCompatible;
 	delete m_rtreePairToPair;
 }
 
@@ -45,7 +42,6 @@ bool AttributeTranslator::Load(std::string filename)
 				}
 			}
 			if (it == sourceBr->end()) {
-				//sourceBr->push_back(compatiblePair);
 				std::vector<AttValPair>* sourceBrUpdated = new std::vector<AttValPair>(*sourceBr);
 				sourceBrUpdated->push_back(compatiblePair);
 				m_rtreePairToPair->insert(sourcePair, *sourceBrUpdated);

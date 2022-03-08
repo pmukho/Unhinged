@@ -4,16 +4,33 @@
 #include "provided.h"
 #include <fstream>
 #include <iostream>
-//#include <sstream>
 
 MemberDatabase::MemberDatabase()
-//	: m_rtreePProfile(new RadixTree<PersonProfile>)
-	: m_rtreePProfile(RadixTree<PersonProfile>())
-{}
+	: m_rtreeEmailToPProfile(RadixTree<PersonProfile*>()), m_rtreeAttValToEmails(RadixTree<std::vector<std::string>*>()), 
+	m_emailSet(std::set<std::string>()), m_attvalSet(std::set<std::string>())
+{
+	/*PersonProfile* p = new PersonProfile("test", "rand@gmail.com");
+	p->AddAttValPair(AttValPair("trait","quirky"));
+	m_rtreeEmailToPProfile.insert("rand@gmail.com", p);
+	m_emailSet.insert("rand@gmail.com");*/
+}
 
 MemberDatabase::~MemberDatabase()
 {
-	//delete m_rtreePProfile;
+	//delete m_rtreeEmailToPProfile;
+	//delete m_rtreeAttValToEmail;
+	for (auto it = m_emailSet.begin(); it != m_emailSet.end(); it++) {
+		PersonProfile** pp = m_rtreeEmailToPProfile.search(*it);
+		if (pp != nullptr) { // should never be the case
+			delete (*pp);
+		}
+	}
+	for (auto it = m_attvalSet.begin(); it != m_attvalSet.end(); it++) {
+		std::vector<std::string>** emails = m_rtreeAttValToEmails.search(*it);
+		if (emails != nullptr) { // should never be the case
+			delete (*emails);
+		}
+	}
 }
 
 bool MemberDatabase::LoadDatabase(std::string filename)
@@ -29,45 +46,29 @@ bool MemberDatabase::LoadDatabase(std::string filename)
 		while (databaseFile.good()) {
 			std::getline(databaseFile, name);
 			std::getline(databaseFile, email);
-			//if (m_rtreePProfile->search(email) != nullptr) { // email associated with existing member
-			//	return false;
-			//}
-			//databaseFile >> attvalCount;
-			//std::getline(databaseFile, skip);
-			//PersonProfile toAddPP(name, email);
-			////PersonProfile* toAddPP = new PersonProfile(name, email);
-			//for (int i = 0; i != attvalCount; i++) {
-			//	std::getline(databaseFile, att, ',');
-			//	std::getline(databaseFile, val);
-			//	toAddPP.AddAttValPair(AttValPair(att, val));
-			//	//toAddPP->AddAttValPair(AttValPair(att, val));
-			//}
-			////m_rtreePProfile->insert(email, toAddPP);
-			//m_rtreePProfile->insert(email, toAddPP);
-
-			//std::getline(databaseFile, skip);
-
-			//if (m_rtreePProfile->search(email) == nullptr) {
-			if (m_rtreePProfile.search(email) == nullptr) {
-				databaseFile >> attvalCount;
-				std::getline(databaseFile, skip);
-				//PersonProfile* profile = new PersonProfile(name, email);
-				PersonProfile profile(name, email);
-				for (int i = 0; i != attvalCount; i++) {
-					std::getline(databaseFile, att, ',');
-					std::getline(databaseFile, val);
-					//profile->AddAttValPair(AttValPair(att, val));
-					profile.AddAttValPair(AttValPair(att, val));
-				}
-				//m_rtreePProfile->insert(email, *profile);
-				m_rtreePProfile.insert(email, profile);
-
-				//delete profile;
-				std::getline(databaseFile, skip);
-			}
-			else {
+			if (m_rtreeEmailToPProfile.search(email) != nullptr) {
 				return false;
 			}
+			m_emailSet.insert(email);
+			PersonProfile* ppToAdd = new PersonProfile(name, email);
+			databaseFile >> attvalCount;
+			std::getline(databaseFile, skip);
+			for (int i = 0; i != attvalCount; i++) {
+				std::getline(databaseFile, att, ',');
+				std::getline(databaseFile, val);
+				ppToAdd->AddAttValPair(AttValPair(att, val));
+
+				std::string attvalKey = att + val;
+				std::vector<std::string>** emailVec = m_rtreeAttValToEmails.search(attvalKey);
+				if (emailVec == nullptr) {
+					m_rtreeAttValToEmails.insert(attvalKey, new std::vector<std::string>);
+					emailVec = m_rtreeAttValToEmails.search(attvalKey);
+					m_attvalSet.insert(attvalKey);
+				}
+				(*emailVec)->push_back(email);
+			}
+			std::getline(databaseFile, skip);
+			m_rtreeEmailToPProfile.insert(email, ppToAdd);
 		}
 	}
 	return true;
@@ -81,6 +82,5 @@ std::vector<std::string> MemberDatabase::FindMatchingMembers(const AttValPair& i
 
 const PersonProfile* MemberDatabase::GetMemberByEmail(std::string email) const
 {
-	//return m_rtreePProfile->search(email);
-	return m_rtreePProfile.search(email);
+	return new PersonProfile("", "");
 }

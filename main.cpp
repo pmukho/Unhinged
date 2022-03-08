@@ -16,47 +16,25 @@ const std::string TRANSLATOR_FILE = "translator.txt";
 
 //bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at);
 
-int main() {
-    //MemberDatabase mdb;
-    //if (!mdb.LoadDatabase(MEMBERS_FILE))
-    //{
-    //    std::cout << "Error loading " << MEMBERS_FILE << std::endl;
-    //    return 1;
-    //}
-    //AttributeTranslator at;
-    //if (!at.Load(TRANSLATOR_FILE))
-    //{
-    //    std::cout << "Error loading " << TRANSLATOR_FILE << std::endl;
-    //    return 1;
-    //}
-
-    //while (findMatches(mdb, at))
-    //    ;
-
-    //std::cout << "Happy dating!" << std::endl;
-    PersonProfile pp1("billy", "bbob@yahoo.com");
-    std::cout << pp1.GetName() << ", " << pp1.GetEmail() << std::endl;
-    pp1.AddAttValPair(AttValPair("hobby", "rowing"));
-    pp1.AddAttValPair(AttValPair("hobby", "gambling"));
-    pp1.AddAttValPair(AttValPair("occupation", "free_loader"));
-    //pp1.AddAttValPair(AttValPair("hobby", "rowing"));
-    std::cout << pp1.GetNumAttValPairs() << std::endl;
-    for (int i = 0; i != pp1.GetNumAttValPairs(); i++) {
-        AttValPair av;
-        pp1.GetAttVal(i, av);
-        std::cout << av.attribute << " ==> " << av.value << std::endl;
-    }
-
-    MemberDatabase md;
-    if (md.LoadDatabase("members.txt")) std::cout << "MemberDatabase Load Success" << std::endl;
-    else std::cout << "MemberDatabase Load Fail" << std::endl;
-
-    AttributeTranslator at;
-    if (at.Load("translator.txt")) std::cout << "AttributeTranslator Load Success" << std::endl;
-    else std::cout << "AttributeTranslator Load Fail" << std::endl;
-
-    std::cout << "????????????????????" << std::endl;
-}
+//int main() {
+//    //MemberDatabase mdb;
+//    //if (!mdb.LoadDatabase(MEMBERS_FILE))
+//    //{
+//    //    std::cout << "Error loading " << MEMBERS_FILE << std::endl;
+//    //    return 1;
+//    //}
+//    //AttributeTranslator at;
+//    //if (!at.Load(TRANSLATOR_FILE))
+//    //{
+//    //    std::cout << "Error loading " << TRANSLATOR_FILE << std::endl;
+//    //    return 1;
+//    //}
+//
+//    //while (findMatches(mdb, at))
+//    //    ;
+//
+//    //std::cout << "Happy dating!" << std::endl;
+//}
 
 //bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)
 //{
@@ -104,3 +82,62 @@ int main() {
 //    std::cout << std::endl;
 //    return true;
 //}
+
+int main()
+{
+	//TESTING RadixTree
+	RadixTree<std::string> rt;
+	rt.insert("Georgia", "Atlanta");
+	rt.insert("California", "San Diego");
+	rt.insert("California", "Los Angeles");
+	std::cout << *rt.search("California") << std::endl;
+
+	RadixTree<AttValPair> rt2;
+	rt2.insert("howdy", AttValPair("trait", "racist"));
+	rt2.insert("hello", AttValPair("trait", "basic"));
+	rt2.insert("hello", AttValPair("trait", "boring"));
+	AttValPair* av = rt2.search("hello");
+	std::cout << av->attribute << " => " << av->value << std::endl;
+
+	std::cout << "========================" << std::endl;
+
+	//TESTING PersonProfile
+	PersonProfile pp1("Billy", "bbob@gmail.com");
+	std::cout << pp1.GetName() << ", " << pp1.GetEmail() << std::endl;
+	pp1.AddAttValPair(AttValPair("hobby", "gambling"));
+	pp1.AddAttValPair(AttValPair("hobby", "gambling"));
+	pp1.AddAttValPair(AttValPair("trait", "fabulous"));
+	pp1.AddAttValPair(AttValPair("hobby", "running"));
+	for (int i = 0; i != pp1.GetNumAttValPairs(); i++) {
+		AttValPair av;
+		pp1.GetAttVal(i, av);
+		std::cout << av.attribute << " => " << av.value << std::endl;
+	}
+
+	/*PersonProfile pp2("Joe", "jbru@yahoo.com");
+	pp2.AddAttValPair(AttValPair("job", "dealer"));
+	PersonProfile pp3("Sam", "ssmith@gmail.com");
+	pp3.AddAttValPair(AttValPair("hobby", "pigeon_racing"));
+	RadixTree<PersonProfile*> rt3;
+	rt3.insert(pp1.GetEmail(), new PersonProfile(pp1));
+	rt3.insert(pp2.GetEmail(), new PersonProfile(pp2));
+	rt3.insert(pp2.GetEmail(), new PersonProfile(pp1));
+	rt3.insert(pp3.GetEmail(), new PersonProfile(pp3));
+	std::cout << (**(rt3.search(pp2.GetEmail()))).GetName() << std::endl;
+	std::cout << "========================" << std::endl;*/
+	//Lesson here is to not have a RadixTree of a type without a copy constructor, ValueType is a pointer type
+
+	//TESTING MemberDatabase
+	MemberDatabase md;
+	if (md.LoadDatabase("members.txt")) std::cout << "MemberDatabase Load Success" << std::endl;
+	else std::cout << "MemberDatabase Load Fail" << std::endl;
+	/*const PersonProfile* ppMD = md.GetMemberByEmail("Eland@live.com");
+	std::cout << ppMD->GetName() << ", " << ppMD->GetEmail() << std::endl;
+	for (int i = 0; i != ppMD->GetNumAttValPairs(); i++) {
+		AttValPair av;
+		ppMD->GetAttVal(i, av);
+		std::cout << av.attribute << " => " << av.value << std::endl;
+	}*/
+
+	std::cout << "========================" << std::endl;
+}
