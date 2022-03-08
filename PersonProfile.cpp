@@ -4,18 +4,15 @@
 #include "provided.h"
 
 PersonProfile::PersonProfile(std::string name, std::string email)
-//: m_name(name), m_email(email), m_countAttValPairs(0), m_rtreeAttVal(new RadixTree<std::set<std::string>>), m_attVec(new std::vector<std::string>)
-	: m_name(name), m_email(email), m_countAttValPairs(0), m_rtreeAttVal(new RadixTree<std::set<std::string>>), m_attvalVec(new std::vector<AttValPair*>)
+//	: m_name(name), m_email(email), m_countAttValPairs(0), m_rtreeAttVal(new RadixTree<std::set<std::string>>), m_attvalVec(new std::vector<AttValPair*>)
+//	: m_name(name), m_email(email), m_countAttValPairs(0), m_rtreeAttVal(new RadixTree<std::set<std::string>>), m_attvalVec(new std::vector<AttValPair>)
+	: m_name(name), m_email(email), m_countAttValPairs(0), m_rtreeAttVal(RadixTree<std::set<std::string>>()), m_attvalVec(std::vector<AttValPair>())
 {}
 
 PersonProfile::~PersonProfile()
 {
-	delete m_rtreeAttVal;
-	//m_attVec->clear();
-	for (auto it = m_attvalVec->begin(); it != m_attvalVec->end(); it++) {
-		delete (*it);
-	}
-	delete m_attvalVec;
+	//delete m_rtreeAttVal;
+	//delete m_attvalVec;
 }
 
 std::string PersonProfile::GetName() const
@@ -30,20 +27,26 @@ std::string PersonProfile::GetEmail() const
 
 void PersonProfile::AddAttValPair(const AttValPair& attval)
 {
-	std::set<std::string>* foundAttSet = m_rtreeAttVal->search(attval.attribute);
-	if (foundAttSet != nullptr) { // existing attribute
-		if (foundAttSet->insert(attval.value).second == false) { // existing attribute-value pair, fail to insert
-			return;
-		}
+	//std::set<std::string>* foundAttSet = m_rtreeAttVal->search(attval.attribute);
+	std::set<std::string>* foundAttSet = m_rtreeAttVal.search(attval.attribute);
+
+	if (foundAttSet == nullptr) {
+		//m_rtreeAttVal->insert(attval.attribute, std::set<std::string>());
+		//foundAttSet = m_rtreeAttVal->search(attval.attribute);
+		m_rtreeAttVal.insert(attval.attribute, std::set<std::string>());
+		foundAttSet = m_rtreeAttVal.search(attval.attribute);
 	}
-	else {
-		std::set<std::string> toAddSet;
-		toAddSet.insert(attval.value);
-		m_rtreeAttVal->insert(attval.attribute, toAddSet);
-		//m_attVec->push_back(attval.attribute);
+	if (foundAttSet->find(attval.value) == foundAttSet->end()) {
+		std::set<std::string>* foundAttSetUpdated = new std::set<std::string>(*foundAttSet);
+		foundAttSetUpdated->insert(attval.value);
+		//m_rtreeAttVal->insert(attval.attribute, *foundAttSetUpdated);
+		//m_attvalVec->push_back(AttValPair(attval));
+		m_rtreeAttVal.insert(attval.attribute, *foundAttSetUpdated);
+		m_attvalVec.push_back(AttValPair(attval));
+		m_countAttValPairs++;
+		delete foundAttSetUpdated;
 	}
-	m_attvalVec->push_back(new AttValPair(attval.attribute, attval.value));
-	m_countAttValPairs++;
+	
 }
 
 int PersonProfile::GetNumAttValPairs() const
@@ -58,21 +61,7 @@ bool PersonProfile::GetAttVal(int attribute_num, AttValPair& attval) const
 		return false;
 	}
 
-	//int stepsTaken = 0;
-	//for (int i = 0; i < m_attVec->size(); i++) {
-	//	std::string attOfInterest = (*m_attVec)[i];
-	//	std::set<std::string>* valsForAtt = m_rtreeAttVal->search(attOfInterest);
-	//	for (auto it = valsForAtt->cbegin(); it != valsForAtt->end(); it++) {
-	//		if (stepsTaken == attribute_num) {
-	//			attval = AttValPair(attOfInterest, *it);
-	//			return true;
-	//		}
-	//		stepsTaken++;
-	//	}
-	//}
-	////unreachable
-	//return false;
-	attval.attribute = (*m_attvalVec)[attribute_num]->attribute;
-	attval.value = (*m_attvalVec)[attribute_num]->value;
+	//attval = (*m_attvalVec)[attribute_num];
+	attval = m_attvalVec[attribute_num];
 	return true;
 }

@@ -6,7 +6,8 @@
 
 AttributeTranslator::AttributeTranslator()
 //	: m_rtreeAttSValSPairCompatible(new RadixTree<RadixTree<std::vector<AttValPair>>>)
-	: m_rtreePairToPair(new RadixTree<std::vector<std::string>>)
+//	: m_rtreePairToPair(new RadixTree<std::vector<std::string>>)
+	: m_rtreePairToPair(new RadixTree<std::vector<AttValPair>>)
 {}
 
 AttributeTranslator::~AttributeTranslator()
@@ -30,36 +31,12 @@ bool AttributeTranslator::Load(std::string filename)
 			std::getline(translatorFile, attCRead, ',');
 			std::getline(translatorFile, valCRead);
 
-			//RadixTree<std::vector<AttValPair>>* attSBranch = m_rtreeAttSValSPairCompatible->search(attSRead);
-			//if (attSBranch == nullptr) { // unknown attribute, start new attSBranch
-			//	m_rtreeAttSValSPairCompatible->insert(attSRead, RadixTree<std::vector<AttValPair>>());
-			//	attSBranch = m_rtreeAttSValSPairCompatible->search(attSRead);
-			//}
-			////on attSBranch now
-			//std::vector<AttValPair>* valSBranch = attSBranch->search(valSRead);
-			//if (valSBranch == nullptr) { // unknown val, start new valSBranch
-			//	attSBranch->insert(valSRead, std::vector<AttValPair>());
-			//	valSBranch = attSBranch->search(valSRead);
-			//}
-			////on valSBranch now
-			//auto it = valSBranch->cbegin();
-			//for (; it != valSBranch->end(); it++) {
-			//	if ((*it).attribute == attCRead && (*it).value == valCRead) {
-			//		break;
-			//	}
-			//}
-			//if (it == valSBranch->end()) {
-			//	valSBranch->push_back(AttValPair(attCRead, valCRead));
-			//	attSBranch->insert(valSRead, *valSBranch);
-			//	m_rtreeAttSValSPairCompatible->insert(attSRead, *attSBranch);
-			//}
-
-			std::string sourcePair(attSRead + "," + valSRead);
-			std::string compatiblePair(attCRead + "," + valCRead);
-			std::vector<std::string>* sourceBr = m_rtreePairToPair->search(sourcePair);
+			std::string sourcePair(attSRead + valSRead);
+			AttValPair compatiblePair(attCRead, valCRead);
+			std::vector<AttValPair>* sourceBr = m_rtreePairToPair->search(sourcePair);
 			if (sourceBr == nullptr) {
-				m_rtreePairToPair->insert(attSRead, std::vector<std::string>());
-				sourceBr = m_rtreePairToPair->search(attSRead);
+				m_rtreePairToPair->insert(sourcePair, std::vector<AttValPair>());
+				sourceBr = m_rtreePairToPair->search(sourcePair);
 			}
 			auto it = sourceBr->cbegin();
 			for (; it != sourceBr->end(); it++) {
@@ -68,11 +45,11 @@ bool AttributeTranslator::Load(std::string filename)
 				}
 			}
 			if (it == sourceBr->end()) {
-				sourceBr->push_back(compatiblePair);
-			}
-			
-			for (int i = 0; i != sourceBr->size(); i++) {
-				std::cout << (*sourceBr)[i] << std::endl;
+				//sourceBr->push_back(compatiblePair);
+				std::vector<AttValPair>* sourceBrUpdated = new std::vector<AttValPair>(*sourceBr);
+				sourceBrUpdated->push_back(compatiblePair);
+				m_rtreePairToPair->insert(sourcePair, *sourceBrUpdated);
+				delete sourceBrUpdated;
 			}
 		}
 	}
@@ -83,7 +60,7 @@ std::vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const Att
 {
 	std::vector<AttValPair> vecToReturn;
 
-	std::string toSearch = source.attribute + source.value;
+	/*std::string toSearch = source.attribute + source.value;
 	std::vector<std::string>* vecCompatible = m_rtreePairToPair->search(toSearch);
 	if (vecCompatible != nullptr) {
 		for (int i = 0; i < vecCompatible->size(); i++) {
@@ -93,6 +70,12 @@ std::vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const Att
 			std::string valC = pairOfInterest.substr(splitIndex);
 			vecToReturn.push_back(AttValPair(attC, valC));
 		}
+	}*/
+
+	std::string toSearch = source.attribute + source.value;
+	std::vector<AttValPair>* vecCompatible = m_rtreePairToPair->search(toSearch);
+	if (vecCompatible != nullptr) {
+		vecToReturn = *vecCompatible;
 	}
 	
 	return vecToReturn;

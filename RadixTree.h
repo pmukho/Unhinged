@@ -15,20 +15,26 @@ public:
 	ValueType* search(std::string key) const;
 private:
 	std::map<std::string, ValueType*>* m_map;
+	//std::map<std::string, ValueType*> m_map;
+	//std::map<std::string, ValueType>* m_map;
 };
 
 template <typename ValueType>
 RadixTree<ValueType>::RadixTree()
 	: m_map(new std::map<std::string, ValueType*>)
+//	: m_map(std::map<std::string, ValueType*>())
+//	: m_map(new std::map<std::string, ValueType>)
 {}
 
 template <typename ValueType>
 RadixTree<ValueType>::~RadixTree()
 {
-	/*auto it = m_map->begin();
-	while (it != m_map->end()) {
+	/*for (auto it = m_map->begin(); it != m_map->end(); ++it) {
 		delete it->second;
-		it = m_map->erase(it);
+	}
+	delete m_map;*/
+	/*for (auto it = m_map.begin(); it != m_map.end(); ++it) {
+		delete it->second;
 	}*/
 	for (auto it = m_map->begin(); it != m_map->end(); it++) {
 		delete it->second;
@@ -39,10 +45,17 @@ RadixTree<ValueType>::~RadixTree()
 template <typename ValueType>
 void RadixTree<ValueType>::insert(std::string key, const ValueType& value)
 {
-	//m_map[key] = value;
-	//ValueType val = value;
+	/*auto it = m_map->find(key);
+	if (it != m_map->end()) {
+		delete it->second;
+	}
+	(*m_map)[key] = new ValueType(value);*/
 
-	//(*m_map)[key] = new ValueType(value);
+	/*auto it = m_map.find(key);
+	if (it != m_map.end()) {
+		delete it->second;
+	}
+	m_map[key] = new ValueType(value);*/
 
 	auto it = m_map->find(key);
 	if (it != m_map->end()) {
@@ -56,9 +69,21 @@ ValueType* RadixTree<ValueType>::search(std::string key) const
 {
 	
 	//return (m_map->find(key)->second);
-	auto it = m_map->find(key);
+	/*auto it = m_map->find(key);
 	if (it != m_map->end()) {
 		return it->second;
+	}
+	return nullptr;*/
+
+	/*auto it = m_map.find(key);
+	if (it != m_map.end()) {
+		return it->second;
+	}
+	return nullptr;*/
+
+	auto it = m_map->find(key);
+	if (it != m_map->end()) {
+		return const_cast<ValueType*>((it->second));
 	}
 	return nullptr;
 }

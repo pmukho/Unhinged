@@ -1,3 +1,6 @@
 ﻿  AttributeTranslator.cpp
-C:\Users\pmukh\code\Unhinged\Unhinged\AttributeTranslator.cpp(89,21): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+  MemberDatabase.cpp
+  PersonProfile.cpp
+  Generating Code...
   Unhinged.vcxproj -> C:\Users\pmukh\code\Unhinged\Debug\Unhinged.exe

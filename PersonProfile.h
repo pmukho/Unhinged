@@ -23,9 +23,10 @@ private:
 	std::string m_name;
 	std::string m_email;
 	int m_countAttValPairs;
-	RadixTree<std::set<std::string>>* m_rtreeAttVal;
-	//std::vector<std::string>* m_attVec;
-	std::vector<AttValPair*>* m_attvalVec;
+	/*RadixTree<std::set<std::string>>* m_rtreeAttVal;
+	std::vector<AttValPair>* m_attvalVec;*/
+	RadixTree<std::set<std::string>> m_rtreeAttVal;
+	std::vector<AttValPair> m_attvalVec;
 };
 
 #endif // PERSONPROFILE_INCLUDED

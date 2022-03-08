@@ -17,7 +17,8 @@ public:
 	std::vector<std::string> FindMatchingMembers(const AttValPair& input) const;
 	const PersonProfile* GetMemberByEmail(std::string email) const;
 private:
-	RadixTree<PersonProfile>* m_rtreePProfile;
+	//RadixTree<PersonProfile>* m_rtreePProfile;
+	RadixTree<PersonProfile> m_rtreePProfile;
 };
 
 #endif // MEMBERDATABASE_INCLUDED
