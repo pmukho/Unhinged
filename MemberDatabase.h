@@ -18,10 +18,6 @@ public:
 	std::vector<std::string> FindMatchingMembers(const AttValPair& input) const;
 	const PersonProfile* GetMemberByEmail(std::string email) const;
 private:
-	//RadixTree<PersonProfile*> m_rtreeEmailToPProfile;
-	//RadixTree<std::vector<std::string>*> m_rtreeAttValToEmails;
-	//std::set<std::string> m_emailSet;
-	//std::set<std::string> m_attvalSet;
 	RadixTree<PersonProfile*>* m_rtreeEmailToProfile;
 	RadixTree<std::vector<std::string>*>* m_rtreeAttValToEmails;
 	std::set<std::string>* m_emailSet;

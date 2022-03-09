@@ -5,17 +5,19 @@
 #include <iostream>
 
 AttributeTranslator::AttributeTranslator()
-	: m_rtreePairToPair(RadixTree<std::vector<AttValPair>*>()), m_sourceAttvalSet(std::set<std::string>())
+	: m_rtreePairToPair(new RadixTree<std::vector<AttValPair>*>), m_sourceAttvalSet(new std::set<std::string>)
 {}
 
 AttributeTranslator::~AttributeTranslator()
 {
-	for (auto it = m_sourceAttvalSet.begin(); it != m_sourceAttvalSet.end(); it++) {
-		std::vector<AttValPair>** compatibleVec = m_rtreePairToPair.search(*it);
-		if (compatibleVec != nullptr) { // should never be the case
+	for (auto it = m_sourceAttvalSet->begin(); it != m_sourceAttvalSet->end(); it++) {
+		std::vector<AttValPair>** compatibleVec = m_rtreePairToPair->search(*it);
+		if (compatibleVec != nullptr) { // always true
 			delete (*compatibleVec);
 		}
 	}
+	delete m_rtreePairToPair;
+	delete m_sourceAttvalSet;
 }
 
 bool AttributeTranslator::Load(std::string filename)
@@ -35,13 +37,13 @@ bool AttributeTranslator::Load(std::string filename)
 
 			std::string sourcePair(attSRead + valSRead);
 			AttValPair compatiblePair(attCRead, valCRead);
-			std::vector<AttValPair>** compaitbleVec = m_rtreePairToPair.search(sourcePair);
-			if (compaitbleVec == nullptr) {
-				m_rtreePairToPair.insert(sourcePair, new std::vector<AttValPair>);
-				compaitbleVec = m_rtreePairToPair.search(sourcePair);
-				m_sourceAttvalSet.insert(sourcePair);
+			std::vector<AttValPair>** compatibleVec = m_rtreePairToPair->search(sourcePair);
+			if (compatibleVec == nullptr) {
+				m_rtreePairToPair->insert(sourcePair, new std::vector<AttValPair>);
+				compatibleVec = m_rtreePairToPair->search(sourcePair);
+				m_sourceAttvalSet->insert(sourcePair);
 			}
-			(*compaitbleVec)->push_back(compatiblePair);
+			(*compatibleVec)->push_back(compatiblePair);
 		}
 	}
 	return true;
@@ -50,8 +52,8 @@ bool AttributeTranslator::Load(std::string filename)
 std::vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPair& source) const
 {
 	std::string sourcePair = source.attribute + source.value;
-	if (m_sourceAttvalSet.find(sourcePair) != m_sourceAttvalSet.end()) {
-		return **m_rtreePairToPair.search(sourcePair);
+	if (m_sourceAttvalSet->find(sourcePair) != m_sourceAttvalSet->end()) {
+		return **m_rtreePairToPair->search(sourcePair);
 	}
 	return std::vector<AttValPair>();
 }
