@@ -114,6 +114,8 @@ int main()
 		std::cout << av.attribute << " => " << av.value << std::endl;
 	}
 
+	std::cout << "========================" << std::endl;
+
 	/*PersonProfile pp2("Joe", "jbru@yahoo.com");
 	pp2.AddAttValPair(AttValPair("job", "dealer"));
 	PersonProfile pp3("Sam", "ssmith@gmail.com");
@@ -128,7 +130,7 @@ int main()
 	//Lesson here is to not have a RadixTree of a type without a copy constructor, ValueType is a pointer type
 
 	//TESTING MemberDatabase
-	MemberDatabase md;
+	/*MemberDatabase md;
 	if (md.LoadDatabase("members.txt")) std::cout << "MemberDatabase Load Success" << std::endl;
 	else std::cout << "MemberDatabase Load Fail" << std::endl;
 	const PersonProfile* ppMD = md.GetMemberByEmail("ELand@live.com");
@@ -138,6 +140,13 @@ int main()
 		const PersonProfile* ppTemp = md.GetMemberByEmail(*it);
 		std::cout << ppTemp->GetName() << ", " << ppTemp->GetEmail() << std::endl;
 	}
+
+	std::cout << "========================" << std::endl;*/
+
+	//Testing AttributeTranslator
+	AttributeTranslator at;
+	if (at.Load("translator.txt")) std::cout << "AttributeTranslator Load Success" << std::endl;
+	else std::cout << "AttributeTranslator Load Fail" << std::endl;
 
 	std::cout << "========================" << std::endl;
 }
