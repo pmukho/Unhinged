@@ -130,18 +130,18 @@ int main()
 	//Lesson here is to not have a RadixTree of a type without a copy constructor, ValueType is a pointer type
 
 	//TESTING MemberDatabase
-	/*MemberDatabase md;
+	MemberDatabase md;
 	if (md.LoadDatabase("members.txt")) std::cout << "MemberDatabase Load Success" << std::endl;
 	else std::cout << "MemberDatabase Load Fail" << std::endl;
 	const PersonProfile* ppMD = md.GetMemberByEmail("ELand@live.com");
 	std::cout << ppMD->GetName() << ", " << ppMD->GetEmail() << std::endl;
-	std::vector<std::string> matchesPPMD = md.FindMatchingMembers(AttValPair("job", "architect"));
+	/*std::vector<std::string> matchesPPMD = md.FindMatchingMembers(AttValPair("job", "architect"));
 	for (auto it = matchesPPMD.begin(); it != matchesPPMD.end(); it++) {
 		const PersonProfile* ppTemp = md.GetMemberByEmail(*it);
 		std::cout << ppTemp->GetName() << ", " << ppTemp->GetEmail() << std::endl;
-	}
+	}*/
 
-	std::cout << "========================" << std::endl;*/
+	std::cout << "========================" << std::endl;
 
 	//Testing AttributeTranslator
 	AttributeTranslator at;
