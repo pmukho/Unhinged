@@ -52,8 +52,9 @@ bool AttributeTranslator::Load(std::string filename)
 std::vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPair& source) const
 {
 	std::string sourcePair = source.attribute + source.value;
-	if (m_sourceAttvalSet->find(sourcePair) != m_sourceAttvalSet->end()) {
-		return **m_rtreePairToPair->search(sourcePair);
+	std::vector<AttValPair>** compatibleVec = m_rtreePairToPair->search(sourcePair);
+	if (compatibleVec != nullptr) {
+		return **compatibleVec;
 	}
 	return std::vector<AttValPair>();
 }

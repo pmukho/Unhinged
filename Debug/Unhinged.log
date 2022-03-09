@@ -1,5 +1,4 @@
 ﻿  AttributeTranslator.cpp
-  MatchMaker.cpp
-  main.cpp
+  MemberDatabase.cpp
   Generating Code...
   Unhinged.vcxproj -> C:\Users\pmukh\code\Unhinged\Debug\Unhinged.exe
