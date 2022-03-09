@@ -147,6 +147,10 @@ int main()
 	AttributeTranslator at;
 	if (at.Load("translator.txt")) std::cout << "AttributeTranslator Load Success" << std::endl;
 	else std::cout << "AttributeTranslator Load Fail" << std::endl;
+	std::vector<AttValPair> compatibleAttVals = at.FindCompatibleAttValPairs(AttValPair("job", "engineer"));
+	for (auto it = compatibleAttVals.begin(); it != compatibleAttVals.end(); it++) {
+		std::cout << it->attribute << " => " << it->value << std::endl;
+	}
 
 	std::cout << "========================" << std::endl;
 }

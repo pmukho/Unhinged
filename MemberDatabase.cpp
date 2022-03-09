@@ -17,8 +17,6 @@ MemberDatabase::MemberDatabase()
 
 MemberDatabase::~MemberDatabase()
 {
-	//delete m_rtreeEmailToPProfile;
-	//delete m_rtreeAttValToEmail;
 	for (auto it = m_emailSet.begin(); it != m_emailSet.end(); it++) {
 		PersonProfile** pp = m_rtreeEmailToPProfile.search(*it);
 		if (pp != nullptr) { // should never be the case
@@ -76,20 +74,16 @@ bool MemberDatabase::LoadDatabase(std::string filename)
 
 std::vector<std::string> MemberDatabase::FindMatchingMembers(const AttValPair& input) const
 {
-	//std::vector<std::string> v;
-
 	std::string relevantAttVal = input.attribute + input.value;
 	if (m_attvalSet.find(relevantAttVal) != m_attvalSet.end()) {
 		return **m_rtreeAttValToEmails.search(relevantAttVal);
 	}
-
 	return std::vector<std::string>();
 }
 
 const PersonProfile* MemberDatabase::GetMemberByEmail(std::string email) const
 {
 	if (m_emailSet.find(email) != m_emailSet.end()) {
-		//std::cout << "here" << std::endl;
 		return *m_rtreeEmailToPProfile.search(email);
 	}
 	return nullptr;
