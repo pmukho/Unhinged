@@ -76,11 +76,21 @@ bool MemberDatabase::LoadDatabase(std::string filename)
 
 std::vector<std::string> MemberDatabase::FindMatchingMembers(const AttValPair& input) const
 {
-	std::vector<std::string> v;
-	return v;
+	//std::vector<std::string> v;
+
+	std::string relevantAttVal = input.attribute + input.value;
+	if (m_attvalSet.find(relevantAttVal) != m_attvalSet.end()) {
+		return **m_rtreeAttValToEmails.search(relevantAttVal);
+	}
+
+	return std::vector<std::string>();
 }
 
 const PersonProfile* MemberDatabase::GetMemberByEmail(std::string email) const
 {
-	return new PersonProfile("", "");
+	if (m_emailSet.find(email) != m_emailSet.end()) {
+		//std::cout << "here" << std::endl;
+		return *m_rtreeEmailToPProfile.search(email);
+	}
+	return nullptr;
 }

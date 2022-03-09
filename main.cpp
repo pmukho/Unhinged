@@ -131,13 +131,13 @@ int main()
 	MemberDatabase md;
 	if (md.LoadDatabase("members.txt")) std::cout << "MemberDatabase Load Success" << std::endl;
 	else std::cout << "MemberDatabase Load Fail" << std::endl;
-	/*const PersonProfile* ppMD = md.GetMemberByEmail("Eland@live.com");
+	const PersonProfile* ppMD = md.GetMemberByEmail("ELand@live.com");
 	std::cout << ppMD->GetName() << ", " << ppMD->GetEmail() << std::endl;
-	for (int i = 0; i != ppMD->GetNumAttValPairs(); i++) {
-		AttValPair av;
-		ppMD->GetAttVal(i, av);
-		std::cout << av.attribute << " => " << av.value << std::endl;
-	}*/
+	std::vector<std::string> matchesPPMD = md.FindMatchingMembers(AttValPair("job", "architect"));
+	for (auto it = matchesPPMD.begin(); it != matchesPPMD.end(); it++) {
+		const PersonProfile* ppTemp = md.GetMemberByEmail(*it);
+		std::cout << ppTemp->GetName() << ", " << ppTemp->GetEmail() << std::endl;
+	}
 
 	std::cout << "========================" << std::endl;
 }
