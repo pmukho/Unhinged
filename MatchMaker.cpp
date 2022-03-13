@@ -16,6 +16,8 @@ MatchMaker::~MatchMaker()
 std::vector<EmailCount> MatchMaker::IdenitfyRankedMatches(std::string email, int threshold) const
 {
 	const PersonProfile* ppOfInterest = m_mdb->GetMemberByEmail(email);
-	//std::unordered_set<std::string>
+
+	std::vector<std::string> emails;
+
 	return std::vector<EmailCount>();
 }
