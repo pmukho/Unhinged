@@ -10,10 +10,14 @@ class MatchMaker {
 public:
 	MatchMaker(const MemberDatabase& mdb, const AttributeTranslator& at);
 	~MatchMaker();
-	std::vector<EmailCount> IdenitfyRankedMatches(std::string email, int threshold) const;
+	std::vector<EmailCount> IdentifyRankedMatches(std::string email, int threshold) const;
 private:
-	MemberDatabase* m_mdb;
-	AttributeTranslator* m_at;
+	//MemberDatabase* m_mdb;
+	//AttributeTranslator* m_at;
+	//MemberDatabase m_mdb;
+	//AttributeTranslator m_at;
+	const MemberDatabase* m_mdb;
+	const AttributeTranslator* m_at;
 };
 
 #endif // MATCHMAKER_INCLUDED
