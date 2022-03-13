@@ -15,7 +15,6 @@ public:
 	ValueType* search(std::string key) const;
 private:
 	std::map<std::string, ValueType*> m_map;
-	//std::map<std::string, ValueType*>* m_map;
 };
 
 template <typename ValueType>
