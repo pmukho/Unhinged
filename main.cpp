@@ -153,4 +153,11 @@ int main()
 	}
 
 	std::cout << "========================" << std::endl;
+
+	//Testing MatchMaker
+	MatchMaker mm(md, at);
+	std::vector<EmailCount> matches = mm.IdenitfyRankedMatches("AbFow2483@charter.net", 6);
+	for (auto it = matches.begin(); it != matches.end(); it++) std::cout << it->email << ": " << it->count << std::endl;
+
+	std::cout << "========================" << std::endl;
 }

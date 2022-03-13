@@ -144,6 +144,7 @@
     <ClCompile Include="MatchMaker.cpp" />
     <ClCompile Include="MemberDatabase.cpp" />
     <ClCompile Include="PersonProfile.cpp" />
+    <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="members.txt" />
@@ -156,6 +157,7 @@
     <ClInclude Include="PersonProfile.h" />
     <ClInclude Include="provided.h" />
     <ClInclude Include="RadixTree.h" />
+    <ClInclude Include="utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
