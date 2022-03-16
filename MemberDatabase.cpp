@@ -37,25 +37,26 @@ bool MemberDatabase::LoadDatabase(std::string filename)
 		return false;
 	}
 
-	int count = 0;
-
 	if (databaseFile.is_open()) {
 		std::string name, email, att, val, skip;
 		int attvalCount = 0;
 		while (databaseFile.good()) {
 			std::getline(databaseFile, name);
 			std::getline(databaseFile, email);
-			if (m_rtreeEmailToProfile->search(email) != nullptr) {
-				return false;
+			if (m_emailSet->find(email) != m_emailSet->end()) {
+				return false; // member with email already exists, invalid database
 			}
+			m_rtreeEmailToProfile->insert(email, new PersonProfile(name, email));
+			PersonProfile** ppToAdd = m_rtreeEmailToProfile->search(email);
 			m_emailSet->insert(email);
-			PersonProfile* ppToAdd = new PersonProfile(name, email);
+
 			databaseFile >> attvalCount;
 			std::getline(databaseFile, skip);
+			// Add all pairs to PersonProfile
 			for (int i = 0; i != attvalCount; i++) {
 				std::getline(databaseFile, att, ',');
 				std::getline(databaseFile, val);
-				ppToAdd->AddAttValPair(AttValPair(att, val));
+				(*ppToAdd)->AddAttValPair(AttValPair(att, val));
 
 				std::string attvalKey = att + val;
 				std::vector<std::string>** emailVec = m_rtreeAttValToEmails->search(attvalKey);
@@ -67,13 +68,9 @@ bool MemberDatabase::LoadDatabase(std::string filename)
 				(*emailVec)->push_back(email);
 			}
 			std::getline(databaseFile, skip);
-			m_rtreeEmailToProfile->insert(email, ppToAdd);
-			//return true;
-			count++;
-			//if (count == 20000) return true;
+			//m_rtreeEmailToProfile->insert(email, ppToAdd);
 		}
 	}
-	//std::cout << "here" << std::endl;
 	return true;
 }
 
@@ -93,6 +90,6 @@ const PersonProfile* MemberDatabase::GetMemberByEmail(std::string email) const
 	if (pp != nullptr) {
 		return *pp;
 	}
-	std::cout << " is null, not found by email " << std::endl;
+	//std::cout << " is null, not found by email " << std::endl;
 	return nullptr;
 }

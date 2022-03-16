@@ -18,10 +18,10 @@ public:
 	std::vector<std::string> FindMatchingMembers(const AttValPair& input) const;
 	const PersonProfile* GetMemberByEmail(std::string email) const;
 private:
-	RadixTree<PersonProfile*>* m_rtreeEmailToProfile;
-	RadixTree<std::vector<std::string>*>* m_rtreeAttValToEmails;
-	std::set<std::string>* m_emailSet;
-	std::set<std::string>* m_attvalSet;
+	RadixTree<PersonProfile*>* m_rtreeEmailToProfile; // maps string email to PersonProfile*
+	RadixTree<std::vector<std::string>*>* m_rtreeAttValToEmails; // maps attval string to vector of emails associated with PersonProfile with such AttVal
+	std::set<std::string>* m_emailSet; // set of all emails
+	std::set<std::string>* m_attvalSet; //set of all attval string
 };
 
 #endif // MEMBERDATABASE_INCLUDED

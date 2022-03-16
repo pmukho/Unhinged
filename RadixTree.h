@@ -3,7 +3,7 @@
 #ifndef RADIXTREE_INCLUDED
 #define RADIXTREE_INCLUDED
 
-#include <map>
+//#include <map>
 #include <vector>
 #include <string>
 
@@ -17,7 +17,6 @@ public:
 	void insert(std::string key, const ValueType& value);
 	ValueType* search(std::string key) const;
 private:
-	//std::map<std::string, ValueType*> m_map;
 
 	struct RTNode {
 		ValueType* val; // if leaf node, its not null
@@ -43,56 +42,25 @@ private:
 	RTNode* searchHelper(RTNode* root, std::string key) const;
 };
 
-//template <typename ValueType>
-//RadixTree<ValueType>::RadixTree()
-//	: m_map(std::map<std::string, ValueType*>())
-//{}
-
 template <typename ValueType>
 RadixTree<ValueType>::RadixTree()
-//	: m_root(new RTNode)
 	: m_root(new typename RadixTree<ValueType>::RTNode)
 {}
-
-//template <typename ValueType>
-//RadixTree<ValueType>::~RadixTree()
-//{
-//	for (auto it = m_map.begin(); it != m_map.end(); it++) {
-//		delete it->second;
-//	}
-//	//NOTE: RADIXTREE SHOULD NOT BE RESPONSIBLE FOR DELETING DYNAMICALLY ALLOCATED TYPES
-//}
 
 template <typename ValueType>
 RadixTree<ValueType>::~RadixTree()
 {
-	delete m_root;
+	delete m_root; // should be noted that if ValueType is already a pointer type this does not free memory
 }
-
-//template <typename ValueType>
-//void RadixTree<ValueType>::insert(std::string key, const ValueType& value)
-//{
-//	auto it = m_map.find(key);
-//	if (it != m_map.end()) {
-//		delete it->second;
-//	}
-//	ValueType* val = new ValueType(value);
-//	m_map[key] = val;
-//}
 
 template <typename ValueType>
 void RadixTree<ValueType>::insertHelper(RTNode* root, std::string key, const ValueType& value) {
-//void RadixTree<ValueType>::insertHelper(typename RadixTree<ValueType>::RTNode* root, std::string key, const ValueType& value) {
-	//return;
-	// CASE 1: Free Real Estate
-	//if (key == "") {
+	// CASE 1: Nothing matches key, so add copy of value
 	if (key.empty()) {
 		if (root->val != nullptr) {
 			delete root->val;
 		}
-		//root->val = new ValueType(value);
-		ValueType* toInsert = new ValueType(value);
-		root->val = toInsert;
+		root->val = new ValueType(value);
 		return;
 	}
 
@@ -146,21 +114,10 @@ void RadixTree<ValueType>::insert(std::string key, const ValueType& value)
 	insertHelper(m_root, key, value);
 }
 
-//template <typename ValueType>
-//ValueType* RadixTree<ValueType>::search(std::string key) const
-//{
-//	auto it = m_map.find(key);
-//	if (it != m_map.end()) {
-//		//return const_cast<ValueType*>(it->second);
-//		return it->second;
-//	}
-//	return nullptr;
-//}
-
 template <typename ValueType>
 typename RadixTree<ValueType>::RTNode* RadixTree<ValueType>::searchHelper(typename RadixTree<ValueType>::RTNode* root, std::string key) const
 {
-	if (key == "") {
+	if (key == "") { // where it should be
 		if (root->val != nullptr) {
 			return root;
 		}
@@ -168,24 +125,24 @@ typename RadixTree<ValueType>::RTNode* RadixTree<ValueType>::searchHelper(typena
 	}
 
 	int currChar = key[0];
-	if (root->children[currChar] == nullptr) {
-		return nullptr; 
+	if (root->children[currChar] == nullptr) { // unrecognized edge
+		return nullptr;
 	}
 	std::string existingEdge = root->edge[currChar];
 	int len;
-	if (existingEdge.length() < key.length()) {
+	if (existingEdge.length() < key.length()) { // partial of key could match entire edge
 		len = existingEdge.length();
 	}
-	else {
+	else { // key could match partial of edge or entire edege
 		len = key.length();
 	}
-	if (existingEdge.substr(0, len) != key.substr(0, len)) {
+	if (existingEdge.substr(0, len) != key.substr(0, len)) { // part of key does not match part of edge
 		return nullptr;
 	}
-	if (existingEdge.size() == len) {
-		return searchHelper(root->children[currChar], key.substr(existingEdge.size()));
+	if (existingEdge.length() == len) { // edge matches partial of key, shorten key
+		return searchHelper(root->children[currChar], key.substr(existingEdge.length()));
 	}
-	else {
+	else { // key does not complete edge
 		return nullptr;
 	}
 }

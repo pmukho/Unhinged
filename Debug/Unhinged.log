@@ -1,58 +1,58 @@
 ﻿  AttributeTranslator.cpp
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(110,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(84): message : while compiling class template member function 'void RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>::insertHelper(RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>::RTNode *,std::string,const ValueType &)'
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(78,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(57): message : while compiling class template member function 'void RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>::insertHelper(RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>::RTNode *,std::string,const ValueType &)'
           with
           [
               ValueType=std::vector<AttValPair,std::allocator<AttValPair>> *
           ]
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(146): message : see reference to function template instantiation 'void RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>::insertHelper(RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>::RTNode *,std::string,const ValueType &)' being compiled
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(114): message : see reference to function template instantiation 'void RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>::insertHelper(RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>::RTNode *,std::string,const ValueType &)' being compiled
           with
           [
               ValueType=std::vector<AttValPair,std::allocator<AttValPair>> *
           ]
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(54): message : while compiling class template member function 'RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>::RadixTree(void)'
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(47): message : while compiling class template member function 'RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>::RadixTree(void)'
 C:\Users\pmukh\code\Unhinged\Unhinged\AttributeTranslator.cpp(8): message : see reference to function template instantiation 'RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>::RadixTree(void)' being compiled
 C:\Users\pmukh\code\Unhinged\Unhinged\AttributeTranslator.cpp(8): message : see reference to class template instantiation 'RadixTree<std::vector<AttValPair,std::allocator<AttValPair>> *>' being compiled
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(110,54): warning C4018: '<': signed/unsigned mismatch
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(132,15): warning C4018: '<': signed/unsigned mismatch
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(132,51): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(78,54): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(100,15): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(100,51): warning C4018: '<': signed/unsigned mismatch
   MatchMaker.cpp
   MemberDatabase.cpp
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(110,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(84): message : while compiling class template member function 'void RadixTree<PersonProfile *>::insertHelper(RadixTree<PersonProfile *>::RTNode *,std::string,const ValueType &)'
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(78,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(57): message : while compiling class template member function 'void RadixTree<PersonProfile *>::insertHelper(RadixTree<PersonProfile *>::RTNode *,std::string,const ValueType &)'
           with
           [
               ValueType=PersonProfile *
           ]
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(146): message : see reference to function template instantiation 'void RadixTree<PersonProfile *>::insertHelper(RadixTree<PersonProfile *>::RTNode *,std::string,const ValueType &)' being compiled
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(114): message : see reference to function template instantiation 'void RadixTree<PersonProfile *>::insertHelper(RadixTree<PersonProfile *>::RTNode *,std::string,const ValueType &)' being compiled
           with
           [
               ValueType=PersonProfile *
           ]
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(54): message : while compiling class template member function 'RadixTree<PersonProfile *>::RadixTree(void)'
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(47): message : while compiling class template member function 'RadixTree<PersonProfile *>::RadixTree(void)'
 C:\Users\pmukh\code\Unhinged\Unhinged\MemberDatabase.cpp(9): message : see reference to function template instantiation 'RadixTree<PersonProfile *>::RadixTree(void)' being compiled
 C:\Users\pmukh\code\Unhinged\Unhinged\MemberDatabase.cpp(9): message : see reference to class template instantiation 'RadixTree<PersonProfile *>' being compiled
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(110,54): warning C4018: '<': signed/unsigned mismatch
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(132,15): warning C4018: '<': signed/unsigned mismatch
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(132,51): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(78,54): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(100,15): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(100,51): warning C4018: '<': signed/unsigned mismatch
   PersonProfile.cpp
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(110,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(84): message : while compiling class template member function 'void RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::insertHelper(RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RTNode *,std::string,const ValueType &)'
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(78,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(57): message : while compiling class template member function 'void RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::insertHelper(RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RTNode *,std::string,const ValueType &)'
           with
           [
               ValueType=std::set<std::string,std::less<std::string>,std::allocator<std::string>> *
           ]
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(146): message : see reference to function template instantiation 'void RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::insertHelper(RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RTNode *,std::string,const ValueType &)' being compiled
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(114): message : see reference to function template instantiation 'void RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::insertHelper(RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RTNode *,std::string,const ValueType &)' being compiled
           with
           [
               ValueType=std::set<std::string,std::less<std::string>,std::allocator<std::string>> *
           ]
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(54): message : while compiling class template member function 'RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RadixTree(void)'
-C:\Users\pmukh\code\Unhinged\Unhinged\PersonProfile.cpp(10): message : see reference to function template instantiation 'RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RadixTree(void)' being compiled
-C:\Users\pmukh\code\Unhinged\Unhinged\PersonProfile.cpp(10): message : see reference to class template instantiation 'RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>' being compiled
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(110,54): warning C4018: '<': signed/unsigned mismatch
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(132,15): warning C4018: '<': signed/unsigned mismatch
-C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(132,51): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(47): message : while compiling class template member function 'RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RadixTree(void)'
+C:\Users\pmukh\code\Unhinged\Unhinged\PersonProfile.cpp(7): message : see reference to function template instantiation 'RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RadixTree(void)' being compiled
+C:\Users\pmukh\code\Unhinged\Unhinged\PersonProfile.cpp(7): message : see reference to class template instantiation 'RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>' being compiled
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(78,54): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(100,15): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(100,51): warning C4018: '<': signed/unsigned mismatch
   main.cpp
   Generating Code...
   Unhinged.vcxproj -> C:\Users\pmukh\code\Unhinged\Debug\Unhinged.exe
