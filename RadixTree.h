@@ -21,26 +21,18 @@ private:
 
 	struct RTNode {
 		ValueType* val; // if leaf node, its not null
-		//RTNode* children[VALID_CHAR_RANGE];
-		std::vector<RTNode*> children;
+		RTNode* children[VALID_CHAR_RANGE];
 		std::string edge[VALID_CHAR_RANGE];
 		RTNode() 
 		{
 			val = nullptr;
-			//for (int i = 0; i < VALID_CHAR_RANGE; i++) children[i] = nullptr;
-			for (int i = 0; i < VALID_CHAR_RANGE; i++) {
-				children.push_back(nullptr);
-			}
+			for (int i = 0; i < VALID_CHAR_RANGE; i++) children[i] = nullptr;
 		}
 		~RTNode()
 		{
 			delete val;
-			//delete[] children;
-			/*for (int i = 0; i < VALID_CHAR_RANGE; i++) {
+			for (int i = 0; i < VALID_CHAR_RANGE; i++) {
 				delete children[i];
-			}*/
-			for (auto it = children.begin(); it != children.end(); it++) {
-				delete (*it);
 			}
 		}
 	};
@@ -93,7 +85,8 @@ void RadixTree<ValueType>::insertHelper(RTNode* root, std::string key, const Val
 //void RadixTree<ValueType>::insertHelper(typename RadixTree<ValueType>::RTNode* root, std::string key, const ValueType& value) {
 	//return;
 	// CASE 1: Free Real Estate
-	if (key == "") {
+	//if (key == "") {
+	if (key.empty()) {
 		if (root->val != nullptr) {
 			delete root->val;
 		}
