@@ -1,4 +1,19 @@
-﻿  MatchMaker.cpp
-  main.cpp
-  Generating Code...
+﻿  PersonProfile.cpp
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(117,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(92): message : while compiling class template member function 'void RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::insertHelper(RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RTNode *,std::string,const ValueType &)'
+          with
+          [
+              ValueType=std::set<std::string,std::less<std::string>,std::allocator<std::string>> *
+          ]
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(153): message : see reference to function template instantiation 'void RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::insertHelper(RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RTNode *,std::string,const ValueType &)' being compiled
+          with
+          [
+              ValueType=std::set<std::string,std::less<std::string>,std::allocator<std::string>> *
+          ]
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(62): message : while compiling class template member function 'RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RadixTree(void)'
+C:\Users\pmukh\code\Unhinged\Unhinged\PersonProfile.cpp(10): message : see reference to function template instantiation 'RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>::RadixTree(void)' being compiled
+C:\Users\pmukh\code\Unhinged\Unhinged\PersonProfile.cpp(10): message : see reference to class template instantiation 'RadixTree<std::set<std::string,std::less<std::string>,std::allocator<std::string>> *>' being compiled
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(117,54): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(139,15): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pmukh\code\Unhinged\Unhinged\RadixTree.h(139,51): warning C4018: '<': signed/unsigned mismatch
   Unhinged.vcxproj -> C:\Users\pmukh\code\Unhinged\Debug\Unhinged.exe

@@ -37,6 +37,8 @@ bool MemberDatabase::LoadDatabase(std::string filename)
 		return false;
 	}
 
+	int count = 0;
+
 	if (databaseFile.is_open()) {
 		std::string name, email, att, val, skip;
 		int attvalCount = 0;
@@ -66,8 +68,12 @@ bool MemberDatabase::LoadDatabase(std::string filename)
 			}
 			std::getline(databaseFile, skip);
 			m_rtreeEmailToProfile->insert(email, ppToAdd);
+			//return true;
+			count++;
+			//if (count == 20000) return true;
 		}
 	}
+	//std::cout << "here" << std::endl;
 	return true;
 }
 
@@ -87,5 +93,6 @@ const PersonProfile* MemberDatabase::GetMemberByEmail(std::string email) const
 	if (pp != nullptr) {
 		return *pp;
 	}
+	std::cout << " is null, not found by email " << std::endl;
 	return nullptr;
 }
